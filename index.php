@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+
+<style>
+    .masthead {
+  height: 100vh;
+  min-height: 500px;
+  background-image: url('https://source.unsplash.com/BtbjCFUvBXs/1920x1080');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+	body {
+		margin-bottom: 30px;
+	}
+
+	.line {
+		width: 100%;
+		border-bottom: 1px solid #707070;
+	}
+
+	#tabs .tab {
+		display: inline-block;
+		padding: 5px 10px;
+		cursor: pointer;
+		position: relative;
+		z-index: 5;
+		background-color: lightgray;
+		color: black;
+	}
+
+	#tabs .whiteborder {
+		border: 1px solid #707070;
+		border-bottom: 1px solid #fff;
+		border-radius: 3px 3px 0 0;
+		background-color: lightblue;
+		color: white;
+	}
+
+	#tabs .tabContent {
+		position: relative;
+		top: -1px;
+		z-index: 1;
+		padding: 10px;
+		border-radius: 0 0 3px 3px;
+		color: black;
+	}
+
+	#tabs .hide {
+		display: none;
+	}
+
+	#tabs .show {
+		display: block;
+	}
+
+</style>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="#">Start Bootstrap</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Services</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Contact</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Full Page Image Header with Vertically Centered Content -->
+<header class="masthead">
+  <div class="container h-100">
+    <div class="row h-100 align-items-center">
+      <div class="col-12 text-center">
+        <h1 class="fw-light">Vertically Centered Masthead Content</h1>
+        <p class="lead">A great starter layout for a landing page</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Page Content -->
+<section class="py-5">
+  <div class="container">
+    <h2 class="fw-light">Page Content</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus ab nulla dolorum autem nisi officiis
+      blanditiis voluptatem hic, assumenda aspernatur facere ipsam nemo ratione cumque magnam enim fugiat
+      reprehenderit expedita.</p>
+  </div>
+</section>
+
+    
+
+<div class="container-fluid">
+        <div class="row">
+            <div class="col-sm mt-3" style="text-align:left;margin-left:50px;">
+                <span class="titulo">Chamado -</span>
+            </div>
+            <div class="col-sm mt-3" style="text-align:right;margin-right:50px;">
+                <a href="#" onclick="history.back()" role="button" class="btn btn-primary"><i class="bi bi-arrow-left-square"></i>&#32;Voltar</a>
+            </div>
+        </div>
+        <div id="tabs">
+            <div class="tab whiteborder">Demanda</div>
+            <div class="tab">Comentarios</div>
+            <div class="tab">Tarefas</div>
+            <div class="tab">Previsão</div>
+            <div class="line"></div>
+            <div class="tabContent">
+                <?php include_once 'visualizar_demanda.php'; ?>
+            </div>
+            <div class="tabContent">
+                <?php include_once 'comentarios.php'; ?>
+            </div>
+            <div class="tabContent">
+                <?php include_once 'visualizar_tarefa.php'; ?>
+            </div>
+            <div class="tabContent">
+                <?php include_once 'previsao.php'; ?>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+<script>
+        var tab;
+        var tabContent;
+
+        window.onload = function () {
+            tabContent = document.getElementsByClassName('tabContent');
+            tab = document.getElementsByClassName('tab');
+            hideTabsContent(1);
+        }
+
+        document.getElementById('tabs').onclick = function (event) {
+            var target = event.target;
+            if (target.className == 'tab') {
+                for (var i = 0; i < tab.length; i++) {
+                    if (target == tab[i]) {
+                        showTabsContent(i);
+                        break;
+                    }
+                }
+            }
+        }
+
+        function hideTabsContent(a) {
+            for (var i = a; i < tabContent.length; i++) {
+                tabContent[i].classList.remove('show');
+                tabContent[i].classList.add("hide");
+                tab[i].classList.remove('whiteborder');
+            }
+        }
+
+        function showTabsContent(b) {
+            if (tabContent[b].classList.contains('hide')) {
+                hideTabsContent(0);
+                tab[b].classList.add('whiteborder');
+                tabContent[b].classList.remove('hide');
+                tabContent[b].classList.add('show');
+            }
+        }
+    </script>
+</body>
+</html>
